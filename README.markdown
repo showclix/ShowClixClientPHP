@@ -362,32 +362,39 @@ The constructor takes a single associative array as its parameter. Possible keys
 * 'is\_sanbox' -- set to `TRUE` if you're using the developer sandbox.
 
 
-build_url($rest)
+build\_url($rest)
+
 Generates a url for use with the rest of the framework with the protocl and base_url appropriately prepended to $rest. Example:
 
-* $server->build_url('/Event/1234'); // By default: 'http://www.showclix.com/rest.api/Event/1234'
+* `$server->build_url('/Event/1234'); // By default: 'http://www.showclix.com/rest.api/Event/1234'`
 
 
-build_uri($info)
+build\_uri($info)
+
 Takes the same thing as the first argument to get_resource, and turns it into a URI, if neccessary.
 
-extract_from_uri($info)
+extract\_from\_uri($info)
+
 Returns an array where the first element is an Resource name, and the second element is an Resource ID that correspond to the given URI
 
-NOTE: For the purposes of get_resource, modify_resource and delete_resource, the first argument is either a URI obtained from some server output, or it's an associative array with the keys:
+NOTE: For the purposes of `get_resource`, `modify_resource` and `delete_resource`, the first argument is either a URI obtained from some server output, or it's an associative array with the keys:
 
 * 'entity' -- the name of the Resource with which you wish to deal (i.e. 'Event', 'Seller', etc.)
 * 'id' -- the id of the Resource you're accessing.
 
 
-get_resource($entityid_or_uri, $verbose=false)
+get\_resource($entityid\_or\_uri, $verbose=false)
+
 Retrieves the given resource, returning it as an object.
 
-modify_resource($entityid_or_uri, $modifications, $verbose=false)
-Modifies the specified resource, only updating the keys mentioned in $modifications with the corresponding values.
+modify\_resource($entityid\_or\_uri, $modifications, $verbose=false)
 
-delete_resource($entityid_or_uri, $verbose=false)
+Modifies the specified resource, only updating the keys mentioned in `$modifications` with the corresponding values.
+
+delete\_resource($entityid\_or\_uri, $verbose=false)
+
 Deletes the given resource.
 
-create_resource($entity, $initial, $verbose=false)
+create\_resource($entity, $initial, $verbose=false)
+
 Creates an Entity of the given type using initial values drawn from $initial
