@@ -6,6 +6,7 @@
         public $clientcert = '';
         public $clientkey = '';
         public $verifypeer = FALSE;
+        public $is_sandbox = FALSE;
         
         public function Server($args){
             if(isset($args['protocol'])){
@@ -22,6 +23,9 @@
             }
             if(isset($args['verifypeer'])){
                 $this->verifypeer = $args['verifypeer'];
+            }
+            if(isset($args['is_sandbox'])){
+                $this->is_sandbox = $args['is_sandbox'];
             }
         }
         
@@ -45,6 +49,9 @@
                 //Set up client authentication through ssl
                 if(!$this->verifypeer){
                     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                }
+                if ($this->is_sandbox){
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                 }else{
                     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
                 }
