@@ -3,8 +3,8 @@
     $server = new Server(
                     array(
                         "protocol" => "https",
-                        "clientcert" => <path to cert>
-                        "clientkey" => <path to key>
+                        "clientcert" => '/Users/ssnider/silas.crt',
+                        "clientkey" => '/Users/ssnider/silas.nopass.key'
                         )
                     );
     #Seller
@@ -15,7 +15,7 @@
             "phone"         => "15555555555",
             "email"         => "noreply@showclix.com"
         ));
-    
+    echo "---------------------------------------<br/>";
     var_dump($server->get_resource($seller_uri));
     
     $server->modify_resource($seller_uri, array(
@@ -24,10 +24,11 @@
             "state"         => "PA",
             "zip"           => "15201"
         ));
-    
+    echo "<br/>---------------------------------------<br/>";
     var_dump($server->get_resource($seller_uri));
     $seller_id = $server->extract_from_uri($seller_uri);
     $seller_id = $seller_id[1];
+    echo "<br/>---------------------------------------<br/>";
     var_dump($seller_id);
     
     #Venue
@@ -35,11 +36,12 @@
     $venue_uri = $server->create_resource("Venue", array(
             "venue_name"    => "Test Venue"
         ));
+    echo "<br/>---------------------------------------<br/>";
     var_dump($server->get_resource($venue_uri));
     
     $venue_id = $server->extract_from_uri($venue_uri);
     $venue_id = $venue_id[1];
-    
+    echo "<br/>---------------------------------------<br/>";
     var_dump($venue_id);
     
     #Event
@@ -56,20 +58,24 @@
             "seller_id"     => $seller_id
         ));
     
+    echo "<br/>---------------------------------------<br/>";
     var_dump($server->get_resource($event_uri));
     
     $event_id = $server->extract_from_uri($event_uri);
     $event_id = $event_id[1];
     
-    $price_level_uri = $server->create_resource("Pricelevel", array(
+    $price_level_uri = $server->create_resource("PriceLevel", array(
             "event_id"      => $event_id,
             "price"         => "1000",
             "level"         => "Fancy-pants admission",
             "limit"         => "10"
         ));
     
+    echo "<br/>---------------------------------------<br/>";
     var_dump($server->get_resource($price_level_uri));
+    echo "<br/>---------------------------------------<br/>";
     var_dump($server->get_resource($event_uri . "price_levels"));
+    echo "<br/>---------------------------------------<br/>";
     var_dump($server->get_resource($event_uri . "all_levels"));
     
     $server->delete_resource($price_level_uri);
@@ -77,8 +83,13 @@
     $server->delete_resource($venue_uri);
     $server->delete_resource($seller_uri);
     
+    echo "<br/>---------------------------------------<br/>";
     var_dump($server->get_resource($event_uri));
+    echo "<br/>---------------------------------------<br/>";
     var_dump($server->get_resource($venue_uri));
+    echo "<br/>---------------------------------------<br/>";
     var_dump($server->get_resource($seller_uri));
+    echo "<br/>---------------------------------------<br/>";
     var_dump($server->get_resource($price_level_uri));
+    echo "<br/>---------------------------------------";
 ?>
