@@ -5,7 +5,7 @@
         public $base_url = "www.showclix.com/rest.api";
         public $clientcert = '';
         public $clientkey = '';
-        public $verifypeer = TRUE;
+        public $verifypeer = FALSE;
         
         public function Server($args){
             if(isset($args['protocol'])){
@@ -45,8 +45,9 @@
                 //Set up client authentication through ssl
                 if(!$this->verifypeer){
                     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                }else{
+                    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
                 }
-                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
                 curl_setopt($ch, CURLOPT_SSLCERTTYPE, 'PEM');
                 curl_setopt($ch, CURLOPT_SSLKEYTYPE, 'PEM');
                 curl_setopt($ch, CURLOPT_SSLCERT, $this->clientcert);
@@ -118,6 +119,7 @@
             if ($verbose){
                 var_dump(curl_error($ch));
                 var_dump(curl_getinfo($ch));
+                var_dump($output);
             }
             curl_close($ch);
             preg_match('/Location:\s*?([^\s]+)/',$output,$matches);
