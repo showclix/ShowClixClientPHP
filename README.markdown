@@ -390,4 +390,3 @@ Deletes the given resource.
 
 create_resource($entity, $initial, $verbose=false)
 Creates an Entity of the given type using initial values drawn from $initial
-
