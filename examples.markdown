@@ -1,8 +1,7 @@
 Examples of RESTful API
 =======================
 
-These are examples using the php client library written by ShowClix.  This
-has ports for many popular languages (PHP, Python, C, Ruby, etc.).  Many
+These are examples using the php client library written by ShowClix.  Many
 languages include their own API for HTTP (e.g. Java).
 
 Note: currently only support JSON representations and the
