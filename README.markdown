@@ -115,11 +115,6 @@ cURL Example:
     HTTP/1.1 200 OK
     Date: Mon, 16 Nov 2009 15:23:34 GMT
     Server: Apache/2.0.63 (Unix) PHP/5.2.10 DAV/2 mod_ssl/2.0.63 OpenSSL/0.9.7l
-    X-Powered-By: PHP/5.2.10
-    Set-Cookie: PHPSESSID=703774fbda6aac85c3e624d3a198e938; path=/
-    Expires: Thu, 19 Nov 1981 08:52:00 GMT
-    Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-    Pragma: no-cache
     ETag: f536d3bf14fa84e1fd9446f25172da44
     Content-Length: 441
     Content-Type: text/javascript
@@ -149,10 +144,6 @@ cURL Example:
     HTTP/1.1 200 OK
     Date: Mon, 16 Nov 2009 15:27:48 GMT
     Server: Apache/2.0.63 (Unix) PHP/5.2.10 DAV/2 mod_ssl/2.0.63 OpenSSL/0.9.7l
-    X-Powered-By: PHP/5.2.10
-    Expires: Thu, 19 Nov 1981 08:52:00 GMT
-    Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-    Pragma: no-cache
     ETag: 51a9f2bd1c7aa0e29f9680774888a4ab
     Content-Length: 737
     Content-Type: text/javascript
@@ -179,10 +170,6 @@ cURL Example:
     HTTP/1.1 201 Created
     Date: Mon, 16 Nov 2009 15:20:17 GMT
     Server: Apache/2.0.63 (Unix) PHP/5.2.10 DAV/2 mod_ssl/2.0.63 OpenSSL/0.9.7l
-    X-Powered-By: PHP/5.2.10
-    Expires: Thu, 19 Nov 1981 08:52:00 GMT
-    Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-    Pragma: no-cache
     ETag: dcca48101505dd86b703689a604fe3c4
     Location: https://www.showclix.com/rest.api/Event/6454/
     Content-Length: 0
@@ -206,10 +193,6 @@ cURL Example:
     HTTP/1.1 200 OK
     Date: Mon, 16 Nov 2009 15:35:53 GMT
     Server: Apache/2.0.63 (Unix) PHP/5.2.10 DAV/2 mod_ssl/2.0.63 OpenSSL/0.9.7l
-    X-Powered-By: PHP/5.2.10
-    Expires: Thu, 19 Nov 1981 08:52:00 GMT
-    Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-    Pragma: no-cache
     ETag: 51a9f2bd1c7aa0e29f9680774888a4ab
     Content-Length: 737
     Content-Type: text/javascript
@@ -234,10 +217,6 @@ cURL Example:
     HTTP/1.1 200 OK
     Date: Mon, 16 Nov 2009 15:39:42 GMT
     Server: Apache/2.0.63 (Unix) PHP/5.2.10 DAV/2 mod_ssl/2.0.63 OpenSSL/0.9.7l
-    X-Powered-By: PHP/5.2.10
-    Expires: Thu, 19 Nov 1981 08:52:00 GMT
-    Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-    Pragma: no-cache
     Content-Length: 0
     Content-Type: text/plain
 
@@ -259,10 +238,6 @@ cURL Example:
     HTTP/1.1 200 OK
     Date: Mon, 16 Nov 2009 15:41:18 GMT
     Server: Apache/2.0.63 (Unix) PHP/5.2.10 DAV/2 mod_ssl/2.0.63 OpenSSL/0.9.7l
-    X-Powered-By: PHP/5.2.10
-    Expires: Thu, 19 Nov 1981 08:52:00 GMT
-    Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-    Pragma: no-cache
     Allow: GET,PUT,DELETE
     Content-Length: 0
     Content-Type: text/plain
