@@ -115,11 +115,6 @@ cURL Example:
     HTTP/1.1 200 OK
     Date: Mon, 16 Nov 2009 15:23:34 GMT
     Server: Apache/2.0.63 (Unix) PHP/5.2.10 DAV/2 mod_ssl/2.0.63 OpenSSL/0.9.7l
-    X-Powered-By: PHP/5.2.10
-    Set-Cookie: PHPSESSID=703774fbda6aac85c3e624d3a198e938; path=/
-    Expires: Thu, 19 Nov 1981 08:52:00 GMT
-    Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-    Pragma: no-cache
     ETag: f536d3bf14fa84e1fd9446f25172da44
     Content-Length: 441
     Content-Type: text/javascript
@@ -149,10 +144,6 @@ cURL Example:
     HTTP/1.1 200 OK
     Date: Mon, 16 Nov 2009 15:27:48 GMT
     Server: Apache/2.0.63 (Unix) PHP/5.2.10 DAV/2 mod_ssl/2.0.63 OpenSSL/0.9.7l
-    X-Powered-By: PHP/5.2.10
-    Expires: Thu, 19 Nov 1981 08:52:00 GMT
-    Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-    Pragma: no-cache
     ETag: 51a9f2bd1c7aa0e29f9680774888a4ab
     Content-Length: 737
     Content-Type: text/javascript
@@ -179,10 +170,6 @@ cURL Example:
     HTTP/1.1 201 Created
     Date: Mon, 16 Nov 2009 15:20:17 GMT
     Server: Apache/2.0.63 (Unix) PHP/5.2.10 DAV/2 mod_ssl/2.0.63 OpenSSL/0.9.7l
-    X-Powered-By: PHP/5.2.10
-    Expires: Thu, 19 Nov 1981 08:52:00 GMT
-    Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-    Pragma: no-cache
     ETag: dcca48101505dd86b703689a604fe3c4
     Location: https://api.showclix.com/Event/6454/
     Content-Length: 0
@@ -206,10 +193,6 @@ cURL Example:
     HTTP/1.1 200 OK
     Date: Mon, 16 Nov 2009 15:35:53 GMT
     Server: Apache/2.0.63 (Unix) PHP/5.2.10 DAV/2 mod_ssl/2.0.63 OpenSSL/0.9.7l
-    X-Powered-By: PHP/5.2.10
-    Expires: Thu, 19 Nov 1981 08:52:00 GMT
-    Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-    Pragma: no-cache
     ETag: 51a9f2bd1c7aa0e29f9680774888a4ab
     Content-Length: 737
     Content-Type: text/javascript
@@ -234,10 +217,6 @@ cURL Example:
     HTTP/1.1 200 OK
     Date: Mon, 16 Nov 2009 15:39:42 GMT
     Server: Apache/2.0.63 (Unix) PHP/5.2.10 DAV/2 mod_ssl/2.0.63 OpenSSL/0.9.7l
-    X-Powered-By: PHP/5.2.10
-    Expires: Thu, 19 Nov 1981 08:52:00 GMT
-    Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-    Pragma: no-cache
     Content-Length: 0
     Content-Type: text/plain
 
@@ -259,10 +238,6 @@ cURL Example:
     HTTP/1.1 200 OK
     Date: Mon, 16 Nov 2009 15:41:18 GMT
     Server: Apache/2.0.63 (Unix) PHP/5.2.10 DAV/2 mod_ssl/2.0.63 OpenSSL/0.9.7l
-    X-Powered-By: PHP/5.2.10
-    Expires: Thu, 19 Nov 1981 08:52:00 GMT
-    Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
-    Pragma: no-cache
     Allow: GET,PUT,DELETE
     Content-Length: 0
     Content-Type: text/plain
@@ -335,13 +310,13 @@ ShowClix tracks both public and private use of the API.  If we suspect a client 
 The "follows" Parameter
 The API allows for a follows parameter to be passed in as a query string value to follow relationships and embed relationships representations right within a representation.  By default, relationships are included in representations are URIs themselves.  For example an Event JSON representation defined by the URI http://api.showclix.com/Event/6456 would typically look like...
 
-    {"event_id":"6456","event":"Event Title","ages":"0","genre":"Alternative","date_added":"2009-11-16 10:38:35","date_edited":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","price_levels":"https:\/\/www.showclix\/rest.api\/Event\/6456\/price_levels","venue":"https:\/\/www.showclix\/rest.api\/Event\/6456\/venue","seller":"https:\/\/www.showclix\/rest.api\/Event\/6456\/seller"}
+    {"event_id":"6456","event":"Event Title","ages":"0","genre":"Alternative","date_added":"2009-11-16 10:38:35","date_edited":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","price_levels":"https:\/\/api.showclix.com\/Event\/6456\/price_levels","venue":"https:\/\/api.showclix.com\/Event\/6456\/venue","seller":"https:\/\/api.showclix.com\/Event\/6456\/seller"}
 
-Notice that the values for the relationships in this representation (e.g. price_levels, venue, and seller) are set as URIs, more specifically what the ShowClix API refers to as Relationship URIs.  GETting any of these URIs will return a representation of the Resource identified by that relationship.  In the case of price levels (a relationships that would be considered a "One To Many" relationship) the returned representation would be a JSON formatted array/list of JSON encoded PriceLevel Instance representations. In the case of the venue relationships (a relationship that would be considered a "Many To One" relationship) the Relationships URI, http://www.showclix/rest.api/Event/6456/venue,  would return the JSON representation of that Venue Instance (the same representation available at the URI, http://www.showclix/rest.api/Venue/842). 
+Notice that the values for the relationships in this representation (e.g. price_levels, venue, and seller) are set as URIs, more specifically what the ShowClix API refers to as Relationship URIs.  GETting any of these URIs will return a representation of the Resource identified by that relationship.  In the case of price levels (a relationships that would be considered a "One To Many" relationship) the returned representation would be a JSON formatted array/list of JSON encoded PriceLevel Instance representations. In the case of the venue relationships (a relationship that would be considered a "Many To One" relationship) the Relationships URI, http://api.showclix.com/Event/6456/venue,  would return the JSON representation of that Venue Instance (the same representation available at the URI, http://api.showclix.com/Venue/842). 
 
-The client may desire to actually have these representations embedded right in place for these relationship values, rather than having to perform an additional lookup.  To do this, the client can specify the relationship as a value for the query parameter follows.  For example, if the client wanted to include details about the venue in this event representation, the client would GET http://www.showclix/rest.api/Event/6456?follow[]=venue, returning a new representation with a venue representation embedded right in it...
+The client may desire to actually have these representations embedded right in place for these relationship values, rather than having to perform an additional lookup.  To do this, the client can specify the relationship as a value for the query parameter follows.  For example, if the client wanted to include details about the venue in this event representation, the client would GET http://api.showclix.com/Event/6456?follow[]=venue, returning a new representation with a venue representation embedded right in it...
 
-    {"event_id":"6456","event":"Event Title","ages":"0","genre":"Alternative","date_added":"2009-11-16 10:38:35","date_edited":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","price_levels":"https:\/\/www.showclix\/rest.api\/Event\/6456\/price_levels","venue":{"venue_name":"The REST Venue","capacity":"999","description":"Test...","image":null,"seating_chart":null,"address":"123 Seasame St.","city":"Pittsburgh","state":"PA","zip":"12345","country":"USA","lat":"-73.9403000","lng":"42.8145000"},"seller":"https:\/\/www.showclix\/rest.api\/Event\/6456\/seller"}
+    {"event_id":"6456","event":"Event Title","ages":"0","genre":"Alternative","date_added":"2009-11-16 10:38:35","date_edited":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","price_levels":"https:\/\/api.showclix.com\/Event\/6456\/price_levels","venue":{"venue_name":"The REST Venue","capacity":"999","description":"Test...","image":null,"seating_chart":null,"address":"123 Seasame St.","city":"Pittsburgh","state":"PA","zip":"12345","country":"USA","lat":"-73.9403000","lng":"42.8145000"},"seller":"https:\/\/api.showclix.com\/Event\/6456\/seller"}
 
 Extensions
 The API does allow for extensions to be placed in the URIs.  This will dictate which format your representation will be in.  For example http://api.showclix.com/Event/1234.json would return a JSON formatted representation of this Event Instance, whereas http://api.showclix.com/Event/1234.xml would return the same Event Instance formatted in XML.  At this time, only JSON is supported, however XML and YAML support is expected soon.  Presently when an extension is left of the default format (JSON) is assumed.
@@ -359,34 +334,41 @@ The constructor takes a single associative array as its parameter. Possible keys
 * 'clientcert' -- full path to the client certificate that ShowClix signed. This doesn't have to be present if the 'protocol' is 'http'
 * 'clientkey' -- full path to the client key used to create the client certificate signing request you sent to ShowClix. The key should be in PEM format, and should not have a password.
 * 'verifypeer' -- usually used in conjunction with 'base_url' -- if you weren't directed to set it, then you shouldn't need to touch it.
+* 'is\_sanbox' -- set to `TRUE` if you're using the developer sandbox.
 
 
-build_url($rest)
+build\_url($rest)
+
 Generates a url for use with the rest of the framework with the protocl and base_url appropriately prepended to $rest. Example:
 
-* $server->build_url('/Event/1234'); // By default: 'http://api.showclix.com/Event/1234'
+* `$server->build_url('/Event/1234'); // By default: 'http://api.showclix.com/Event/1234'`
 
+build\_uri($info)
 
-build_uri($info)
-Takes the same thing as the first argument to get_resource, and turns it into a URI, if neccessary.
+Takes the same thing as the first argument to get_resource, and turns it into a URI, if necessary.
 
-extract_from_uri($info)
+extract\_from\_uri($info)
+
 Returns an array where the first element is an Resource name, and the second element is an Resource ID that correspond to the given URI
 
-NOTE: For the purposes of get_resource, modify_resource and delete_resource, the first argument is either a URI obtained from some server output, or it's an associative array with the keys:
+NOTE: For the purposes of `get_resource`, `modify_resource` and `delete_resource`, the first argument is either a URI obtained from some server output, or it's an associative array with the keys:
 
 * 'entity' -- the name of the Resource with which you wish to deal (i.e. 'Event', 'Seller', etc.)
 * 'id' -- the id of the Resource you're accessing.
 
 
-get_resource($entityid_or_uri, $verbose=false)
+get\_resource($entityid\_or\_uri, $verbose=false)
+
 Retrieves the given resource, returning it as an object.
 
-modify_resource($entityid_or_uri, $modifications, $verbose=false)
-Modifies the specified resource, only updating the keys mentioned in $modifications with the corresponding values.
+modify\_resource($entityid\_or\_uri, $modifications, $verbose=false)
 
-delete_resource($entityid_or_uri, $verbose=false)
+Modifies the specified resource, only updating the keys mentioned in `$modifications` with the corresponding values.
+
+delete\_resource($entityid\_or\_uri, $verbose=false)
+
 Deletes the given resource.
 
-create_resource($entity, $initial, $verbose=false)
+create\_resource($entity, $initial, $verbose=false)
+
 Creates an Entity of the given type using initial values drawn from $initial
