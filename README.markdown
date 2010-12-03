@@ -15,9 +15,9 @@ The ShowClix API adheres closely to the principles behind the REST architecture 
 > ## A Brief, High-Level REST Introduction ##
 > A RESTful Web Service can be thought of as just Nouns and Verbs, or in more RESTful terms, Resources and Operations.  A RESTful Service has a group of things (aka Nouns, aka Resources) that we can do stuff to (aka we can apply Operations to these things/Resources).  Pretty simple idea.  These Resources and Operations have a few general principles: 
 > 
-> ## Resources: ##
+> ## Resources ##
 > ### Universal Resource Identifiers (URIs) ###
-> Resources must be universally identifiable through what is typically called a URI.  If the Resources/Nouns we were talking about were people, we could consider Social Security Number as the URI for our Resources (assuming the people were US Citizens and SSNs were actually unique).  Given a URI, I should be able to determine exactly what Resource is being referred to.  When talking about RESTful Web Services, URIs are almost always in the form of the familiar URL.  The ShowClix API follows this convention.  An example URI in the ShowClix API, https://www.showclix.com/rest.api/Event/1234, would identify a single event in the ShowClix system.
+> Resources must be universally identifiable through what is typically called a URI.  If the Resources/Nouns we were talking about were people, we could consider Social Security Number as the URI for our Resources (assuming the people were US Citizens and SSNs were actually unique).  Given a URI, I should be able to determine exactly what Resource is being referred to.  When talking about RESTful Web Services, URIs are almost always in the form of the familiar URL.  The ShowClix API follows this convention.  An example URI in the ShowClix API, https://api.showclix.com/Event/1234, would identify a single event in the ShowClix system.
 > 
 > ### Representations ###
 > Resources in RESTful Web Services are exchanged as representations.  When requesting a Resource in a RESTful Service, the client does not get a physical copy of that Resource (e.g. when requesting a venue, obviously ShowClix doesn't physically send you that venue).  Instead, the client would receive a representation describing that Resource.  In RESTful Web Services, this representation is text describing the resource, structured in the form of XML, JSON, YAML, RSS, Atom, etc..  The ShowClix API uses JSON formatted data for its representations.
@@ -56,26 +56,26 @@ A partner in this documentation refers to a person/organization that has partner
 A seller in this documentation refers to the person/band/promoter that is selling tickets to a particular event thru ShowClix.
 
 ## URI Structure ##
-URIs give us a way to identify Resources and a handle for interacting with data  from the API.  Notice that these identifiers (URIs) are also web accessible URLs (in fact the Web is really just a RESTful API of sorts itself... but that's for another lecture).  All URIs in the API are prefixed with "https://www.showclix.com/rest.api/".  There are several types of URIs: Class URIs, Instance URIs, Relationship URIs, Attribute URIs, and Search URIs.
+URIs give us a way to identify Resources and a handle for interacting with data  from the API.  Notice that these identifiers (URIs) are also web accessible URLs (in fact the Web is really just a RESTful API of sorts itself... but that's for another lecture).  All URIs in the API are prefixed with "https://api.showclix.com/".  There are several types of URIs: Class URIs, Instance URIs, Relationship URIs, Attribute URIs, and Search URIs.
 
 ### Instance URIs ###
-e.g. https://www.showclix.com/rest.api/Event/1234
+e.g. https://api.showclix.com/Event/1234
 An instance URI corresponds to a single Instance in the ShowClix system.  The example URI would correspond to a single particular event.  Using this URI and HTTP (see HTTP section below) the client would be able to retrieve data about this particular event, edit details about this event, and in some cases remove this event altogether.
 
 ### Class URIs ###
-e.g. https://www.showclix.com/rest.api/Event
+e.g. https://api.showclix.com/Event
 A class URI corresponds to a single Class in the ShowClix domain.  Most commonly these URIs are used for creating new Resources.  The example URI above could be used to create a new Event.
 
 ### Relationship URIs ###
-e.g. https://www.showclix.com/rest.api/Seller/123/events
-It's typically good REST practice to expose relationships in your API.  One of the ways the ShowClix API does this is through relationship URIs (see Hyperlinking below for more).  The example URI above could be used to retrieve a list of all the events that belong to a single seller (identified by https://www.showclix.com/rest.api/Seller/123).  To promote what is known as hyperlinking and make API users aware of what relationships are available to them for a particular resource, representations will often include Relationship URIs in them (e.g. the representation for the Seller identified by https://www.showclix.com/rest.api/Seller/123 would include the https://www.showclix.com/rest.api/Seller/123/events Relationship URI along with several other Relationship URIs).
+e.g. https://api.showclix.com/Seller/123/events
+It's typically good REST practice to expose relationships in your API.  One of the ways the ShowClix API does this is through relationship URIs (see Hyperlinking below for more).  The example URI above could be used to retrieve a list of all the events that belong to a single seller (identified by https://api.showclix.com/Seller/123).  To promote what is known as hyperlinking and make API users aware of what relationships are available to them for a particular resource, representations will often include Relationship URIs in them (e.g. the representation for the Seller identified by https://api.showclix.com/Seller/123 would include the https://api.showclix.com/Seller/123/events Relationship URI along with several other Relationship URIs).
 
 ### Attribute URIs ###
-e.g. https://www.showclix.com/rest.api/Event/1234/tickets_remaining
-Attribute URIs expose additional information about a Resource.  Unlike the previous URIs, these URIs do not necessarily expose a Resource (or a collection of Resources like some Relationship URIs).  Instead they can expose scalar values or some other structured data.  The example URI above would return a single integer value determining how many tickets were still available for a particular event (identified by https://www.showclix.com/rest.api/Event/1234).
+e.g. https://api.showclix.com/Event/1234/tickets_remaining
+Attribute URIs expose additional information about a Resource.  Unlike the previous URIs, these URIs do not necessarily expose a Resource (or a collection of Resources like some Relationship URIs).  Instead they can expose scalar values or some other structured data.  The example URI above would return a single integer value determining how many tickets were still available for a particular event (identified by https://api.showclix.com/Event/1234).
 
 ### Search URIs ###
-e.g. https://www.showclix.com/rest.api/-/Event/event_start/GE/2009-10-20%2000%3A00%3A00
+e.g. https://api.showclix.com/-/Event/event_start/GE/2009-10-20%2000%3A00%3A00
 *Coming Soon*.  Search URIs provide a nice way to get filtered results.  They may look a little complex but are very easy to construct. The example URI would give a list of events that had an event start after October 29th, 2009 (notice all dates follow the SQL convention YYYY-MM-DD HH:MM:SS and criteria is URL encoded).
 In general these URLs follow the following format:
 
@@ -99,17 +99,17 @@ HTTP is what drives the ShowClix REST API (and the web in general).  The ShowCli
 The API currently supports the following HTTP methods GET, PUT, POST, DELETE, OPTIONS, HEAD.  Below describes the methods' purposes very briefly and give examples (using the CLI version of cURL for making the HTTP/HTTPS requests).  The key and cert parameters are used only for private access to the API for client authentication.  See the Public vs. Private and Authentication sections below for more details on this topic.
 
 ### GET ###
-GET is by far the most common HTTP operation.  It tells the API to fetch a representation from the URI requested and return it to the client.  For example, sending a GET request to the URI https://www.showclix.com/rest.api/Event/1234 (see Resource URIs above), would return a JSON formatted representation to the API user.
+GET is by far the most common HTTP operation.  It tells the API to fetch a representation from the URI requested and return it to the client.  For example, sending a GET request to the URI https://api.showclix.com/Event/1234 (see Resource URIs above), would return a JSON formatted representation to the API user.
 
 Example:
-Get information about a particular event in the system.  This is a request to a Resource URI (define above), http://www.showclix.com/rest.api/Event/4444.
+Get information about a particular event in the system.  This is a request to a Resource URI (define above), http://api.showclix.com/Event/4444.
 
 cURL Example:
-    curl -v http://www.showclix.com/rest.api/Event/6454
+    curl -v http://api.showclix.com/Event/6454
     
     GET /rest.api/Event/6454 HTTP/1.1
     User-Agent: curl/7.19.5 (i386-apple-darwin8.11.1) libcurl/7.19.5 OpenSSL/0.9.7l zlib/1.2.3 libidn/1.15
-    Host: www.showclix.com
+    Host: api.showclix.com
     Accept: */*
     
     HTTP/1.1 200 OK
@@ -125,7 +125,7 @@ cURL Example:
     Content-Type: text/javascript
     
     
-    {"event_id":"6454","event":"Event Title","ages":"0","genre":"Alternative","date_added":"2009-09-19 14:39:00","date_edited":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","price_levels":"https:\/\/www.showclix.com\/rest.api\/Event\/6454\/price_levels","venue":"https:\/\/www.showclix.com\/rest.api\/Event\/6454\/venue","seller":"https:\/\/www.showclix.com\/rest.api\/Event\/6454\/seller"}
+    {"event_id":"6454","event":"Event Title","ages":"0","genre":"Alternative","date_added":"2009-09-19 14:39:00","date_edited":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","price_levels":"https:\/\/api.showclix.com\/rest.api\/Event\/6454\/price_levels","venue":"https:\/\/api.showclix.com\/rest.api\/Event\/6454\/venue","seller":"https:\/\/api.showclix.com\/rest.api\/Event\/6454\/seller"}
 
 
 ### PUT ###
@@ -136,11 +136,11 @@ Let's go ahead an change the time of our event that we just pulled (this assumes
 
 cURL Example:
 
-    curl -v -s -k --key private.key --cert certificate.crt -X PUT -d '{"event_id":"6454","seller_id":"678","venue_id":"842","event":"My New Event Title","description":"event desc","inventory":"600","private_event":"0","price":"18.00","price_label":"General Admission","price_limit":"1","ticket_purchase_timelimit":null,"ticket_purchase_limit":null,"will_call_ticketing":null,"ages":"0","image":"20091252630916.jpg","url":"http:\/\/www.jokerprod.com","event_type":"3","ticket_note":null,"genre":"Alternative","status":"5","scheme_id":null,"keywords":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","short_name":"","parent":null,"display_image":"1"}' https://www.showclix.com/rest.api/Event/6454
+    curl -v -s -k --key private.key --cert certificate.crt -X PUT -d '{"event_id":"6454","seller_id":"678","venue_id":"842","event":"My New Event Title","description":"event desc","inventory":"600","private_event":"0","price":"18.00","price_label":"General Admission","price_limit":"1","ticket_purchase_timelimit":null,"ticket_purchase_limit":null,"will_call_ticketing":null,"ages":"0","image":"20091252630916.jpg","url":"http:\/\/www.jokerprod.com","event_type":"3","ticket_note":null,"genre":"Alternative","status":"5","scheme_id":null,"keywords":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","short_name":"","parent":null,"display_image":"1"}' https://api.showclix.com/Event/6454
     
     PUT /rest.api/Event/6454 HTTP/1.1
     User-Agent: curl/7.19.5 (i386-apple-darwin8.11.1) libcurl/7.19.5 OpenSSL/0.9.7l zlib/1.2.3 libidn/1.15
-    Host: www.showclix.com
+    Host: api.showclix.com
     Accept: */*
     Content-Length: 639
     Content-Type: text/javascript
@@ -162,15 +162,15 @@ cURL Example:
 
 
 ### POST ###
-POST requests allow the client to create new Resources.  A POST request to create a new Instance should contain the representation of the Instance the client wishes to create (currently JSON formatted only) POSTed to the Class URI (e.g. https://www.showclix.com/rest.api/Event).  On successful POSTs, the client should receive a 201 Created response and the Location header will be set with the full URI of the newly created Resource.
+POST requests allow the client to create new Resources.  A POST request to create a new Instance should contain the representation of the Instance the client wishes to create (currently JSON formatted only) POSTed to the Class URI (e.g. https://api.showclix.com/Event).  On successful POSTs, the client should receive a 201 Created response and the Location header will be set with the full URI of the newly created Resource.
 
 cURL Example:
 
-    curl -v -s -k --key private.key --cert certificate.crt -X POST -d '{"seller_id":"678","venue_id":"842","event":"Event Title","description":"event desc","inventory":"600","private_event":"0","price":"18.00","price_label":"General Admission","price_limit":"1","ticket_purchase_timelimit":null,"ticket_purchase_limit":null,"will_call_ticketing":null,"ages":"0","image":"20091252630916.jpg","url":"http:\/\/www.jokerprod.com","event_type":"3","ticket_note":null,"genre":"Alternative","status":"5","scheme_id":null,"keywords":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","short_name":"","parent":null,"display_image":"1"}' https://www.showclix.com/rest.api/Event
+    curl -v -s -k --key private.key --cert certificate.crt -X POST -d '{"seller_id":"678","venue_id":"842","event":"Event Title","description":"event desc","inventory":"600","private_event":"0","price":"18.00","price_label":"General Admission","price_limit":"1","ticket_purchase_timelimit":null,"ticket_purchase_limit":null,"will_call_ticketing":null,"ages":"0","image":"20091252630916.jpg","url":"http:\/\/www.jokerprod.com","event_type":"3","ticket_note":null,"genre":"Alternative","status":"5","scheme_id":null,"keywords":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","short_name":"","parent":null,"display_image":"1"}' https://api.showclix.com/Event
     
     POST /rest.api/Event HTTP/1.1
     User-Agent: curl/7.19.5 (i386-apple-darwin8.11.1) libcurl/7.19.5 OpenSSL/0.9.7l zlib/1.2.3 libidn/1.15
-    Host: www.showclix.com
+    Host: api.showclix.com
     Accept: */*
     Content-Length: 614
     Content-Type: text/javascript
@@ -184,7 +184,7 @@ cURL Example:
     Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
     Pragma: no-cache
     ETag: dcca48101505dd86b703689a604fe3c4
-    Location: https://www.showclix.com/rest.api/Event/6454/
+    Location: https://api.showclix.com/Event/6454/
     Content-Length: 0
     Content-Type: text/javascript
 
@@ -195,11 +195,11 @@ DELETE requests allow the client to remove Resources.  A DELETE request to a Res
 
 cURL Example:
 
-    curl -v -s -k --key private.key --cert certificate.crt -X DELETE https://www.showclix.com/rest.api/Event/6454
+    curl -v -s -k --key private.key --cert certificate.crt -X DELETE https://api.showclix.com/Event/6454
     
     DELETE /rest.api/Event/6454 HTTP/1.1
     User-Agent: curl/7.19.5 (i386-apple-darwin8.11.1) libcurl/7.19.5 OpenSSL/0.9.7l zlib/1.2.3 libidn/1.15
-    Host: www.showclix.com
+    Host: api.showclix.com
     Accept: */*
     
     
@@ -223,11 +223,11 @@ The HEAD request is almost identical to the GET request, with the exception that
 
 cURL Example:
 
-    curl -v -X HEAD http://www.showclix.com/rest.api/Event/6456
+    curl -v -X HEAD http://api.showclix.com/Event/6456
     
     HEAD /rest.api/Event/6456 HTTP/1.1
     User-Agent: curl/7.19.5 (i386-apple-darwin8.11.1) libcurl/7.19.5 OpenSSL/0.9.7l zlib/1.2.3 libidn/1.15
-    Host: www.showclix.com
+    Host: api.showclix.com
     Accept: */*
     
     
@@ -248,11 +248,11 @@ The OPTIONS request lets a client know what they are permitted to do.  It sets t
 
 cURL Example:
 
-    curl -v -s -k --key private.key --cert certificate.crt -X OPTIONS http://www.showclix.com/rest.api/Event/6456
+    curl -v -s -k --key private.key --cert certificate.crt -X OPTIONS http://api.showclix.com/Event/6456
     
     OPTIONS /rest.api/Event/6456 HTTP/1.1
     User-Agent: curl/7.19.5 (i386-apple-darwin8.11.1) libcurl/7.19.5 OpenSSL/0.9.7l zlib/1.2.3 libidn/1.15
-    Host: www.showclix.com
+    Host: api.showclix.com
     Accept: */*
     
     
@@ -313,7 +313,7 @@ In addition to sending the appropriate status code response, the API will also s
 ## Hyperlinking ##
 The ShowClix REST API promotes hyperlinking in resources representations.  This helps naturally expose the API and relationships among Resources.  When you find another URI in a representation, this typically means that it is hyperlinking to another resource in ShowClix.  Consider the Seller representation below.  Notice that the last attribute, event, has a URI for its value.  This actually links to another representation, a list of all events that belong to this seller.
 
-    {"seller_id":"6","first_name":"Joe","organization":"Showclix","last_name":"Schmoe","events":"https:\/\/www.showclix.com\/rest.api\/Seller\/6/\events"}
+    {"seller_id":"6","first_name":"Joe","organization":"Showclix","last_name":"Schmoe","events":"https:\/\/api.showclix.com\/rest.api\/Seller\/6/\events"}
 
 
 ## Public vs. Private ##
@@ -323,7 +323,7 @@ The ShowClix REST API supports two access levels, Public and Private.  Public ac
 ## Authentication ##
 The API uses SSL Client Certificates for authentication and private access to the API.  ShowClix can provide clients with a private key and signed certificate or partners can create a Certificate Signing Request for ShowClix to sign if that is preferred.  Here is an example using the CLI for the popular cURL library.
 
-    curl -i -X GET --key private.key --cert public.crt https://www.showclix.com/rest.api/Event/1234
+    curl -i -X GET --key private.key --cert public.crt https://api.showclix.com/Event/1234
 
 
 ## Abuse ##
@@ -333,7 +333,7 @@ ShowClix tracks both public and private use of the API.  If we suspect a client 
 ## Additional Features ##
 
 The "follows" Parameter
-The API allows for a follows parameter to be passed in as a query string value to follow relationships and embed relationships representations right within a representation.  By default, relationships are included in representations are URIs themselves.  For example an Event JSON representation defined by the URI http://www.showclix.com/rest.api/Event/6456 would typically look like...
+The API allows for a follows parameter to be passed in as a query string value to follow relationships and embed relationships representations right within a representation.  By default, relationships are included in representations are URIs themselves.  For example an Event JSON representation defined by the URI http://api.showclix.com/Event/6456 would typically look like...
 
     {"event_id":"6456","event":"Event Title","ages":"0","genre":"Alternative","date_added":"2009-11-16 10:38:35","date_edited":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","price_levels":"https:\/\/www.showclix\/rest.api\/Event\/6456\/price_levels","venue":"https:\/\/www.showclix\/rest.api\/Event\/6456\/venue","seller":"https:\/\/www.showclix\/rest.api\/Event\/6456\/seller"}
 
@@ -344,7 +344,7 @@ The client may desire to actually have these representations embedded right in p
     {"event_id":"6456","event":"Event Title","ages":"0","genre":"Alternative","date_added":"2009-11-16 10:38:35","date_edited":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","price_levels":"https:\/\/www.showclix\/rest.api\/Event\/6456\/price_levels","venue":{"venue_name":"The REST Venue","capacity":"999","description":"Test...","image":null,"seating_chart":null,"address":"123 Seasame St.","city":"Pittsburgh","state":"PA","zip":"12345","country":"USA","lat":"-73.9403000","lng":"42.8145000"},"seller":"https:\/\/www.showclix\/rest.api\/Event\/6456\/seller"}
 
 Extensions
-The API does allow for extensions to be placed in the URIs.  This will dictate which format your representation will be in.  For example http://www.showclix.com/rest.api/Event/1234.json would return a JSON formatted representation of this Event Instance, whereas http://www.showclix.com/rest.api/Event/1234.xml would return the same Event Instance formatted in XML.  At this time, only JSON is supported, however XML and YAML support is expected soon.  Presently when an extension is left of the default format (JSON) is assumed.
+The API does allow for extensions to be placed in the URIs.  This will dictate which format your representation will be in.  For example http://api.showclix.com/Event/1234.json would return a JSON formatted representation of this Event Instance, whereas http://api.showclix.com/Event/1234.xml would return the same Event Instance formatted in XML.  At this time, only JSON is supported, however XML and YAML support is expected soon.  Presently when an extension is left of the default format (JSON) is assumed.
 
 
 ## Client Library ##
@@ -364,7 +364,7 @@ The constructor takes a single associative array as its parameter. Possible keys
 build_url($rest)
 Generates a url for use with the rest of the framework with the protocl and base_url appropriately prepended to $rest. Example:
 
-* $server->build_url('/Event/1234'); // By default: 'http://www.showclix.com/rest.api/Event/1234'
+* $server->build_url('/Event/1234'); // By default: 'http://api.showclix.com/Event/1234'
 
 
 build_uri($info)
