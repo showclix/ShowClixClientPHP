@@ -302,7 +302,7 @@ The API uses SSL Client Certificates for authentication and private access to th
 
 
 ## Abuse ##
-ShowClix tracks both public and private use of the API.  If we suspect a client is abusing the the API, ShowClix has the right to throttle or entirely revoke a clients access to the API.
+ShowClix tracks both public and private use of the API.  If we suspect a client is abusing the the API, ShowClix has the right to throttle or entirely revoke a client's access to the API.
 
 
 ## Additional Features ##
@@ -343,11 +343,11 @@ Generates a url for use with the rest of the framework with the protocl and base
 
 * `$server->build_url('/Event/1234'); // By default: 'http://api.showclix.com/Event/1234'`
 
-build\_uri($info)
+> build\_uri($info)
 
 Takes the same thing as the first argument to get_resource, and turns it into a URI, if necessary.
 
-extract\_from\_uri($info)
+> extract\_from\_uri($info)
 
 Returns an array where the first element is an Resource name, and the second element is an Resource ID that correspond to the given URI
 
@@ -357,18 +357,18 @@ NOTE: For the purposes of `get_resource`, `modify_resource` and `delete_resource
 * 'id' -- the id of the Resource you're accessing.
 
 
-get\_resource($entityid\_or\_uri, $verbose=false)
+> get\_resource($entityid\_or\_uri, $verbose=false)
 
 Retrieves the given resource, returning it as an object.
 
-modify\_resource($entityid\_or\_uri, $modifications, $verbose=false)
+> modify\_resource($entityid\_or\_uri, $modifications, $verbose=false)
 
 Modifies the specified resource, only updating the keys mentioned in `$modifications` with the corresponding values.
 
-delete\_resource($entityid\_or\_uri, $verbose=false)
+> delete\_resource($entityid\_or\_uri, $verbose=false)
 
 Deletes the given resource.
 
-create\_resource($entity, $initial, $verbose=false)
+> create\_resource($entity, $initial, $verbose=false)
 
 Creates an Entity of the given type using initial values drawn from $initial
