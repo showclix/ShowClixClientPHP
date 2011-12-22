@@ -56,7 +56,7 @@ A partner in this documentation refers to a person/organization that has partner
 A seller in this documentation refers to the person/band/promoter that is selling tickets to a particular event thru ShowClix.
 
 ## URI Structure ##
-URIs give us a way to identify Resources and a handle for interacting with data  from the API.  Notice that these identifiers (URIs) are also web accessible URLs (in fact the Web is really just a RESTful API of sorts itself... but that's for another lecture).  All URIs in the API are prefixed with "https://api.showclix.com/".  There are several types of URIs: Class URIs, Instance URIs, Relationship URIs, Attribute URIs, and Search URIs.
+URIs give us a way to identify Resources and a handle for interacting with data  from the API.  Notice that these identifiers (URIs) are also web accessible URLs (in fact the Web is really just a RESTful API of sorts itself... but that's for another lecture).  All URIs in the API are prefixed with "https://api.showclix.com/".  There are several types of URIs: Class URIs, Instance URIs, Relationship URIs, and Attribute URIs.
 
 ### Instance URIs ###
 e.g. https://api.showclix.com/Event/1234
