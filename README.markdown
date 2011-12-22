@@ -74,20 +74,6 @@ It's typically good REST practice to expose relationships in your API.  One of t
 e.g. https://api.showclix.com/Event/1234/tickets_remaining
 Attribute URIs expose additional information about a Resource.  Unlike the previous URIs, these URIs do not necessarily expose a Resource (or a collection of Resources like some Relationship URIs).  Instead they can expose scalar values or some other structured data.  The example URI above would return a single integer value determining how many tickets were still available for a particular event (identified by https://api.showclix.com/Event/1234).
 
-### Search URIs ###
-e.g. https://api.showclix.com/-/Event/event_start/GE/2009-10-20%2000%3A00%3A00
-*Coming Soon*.  Search URIs provide a nice way to get filtered results.  They may look a little complex but are very easy to construct. The example URI would give a list of events that had an event start after October 29th, 2009 (notice all dates follow the SQL convention YYYY-MM-DD HH:MM:SS and criteria is URL encoded).
-In general these URLs follow the following format:
-
-    https://www/showclix.com/rest.api/-/<CLASS>/<ATTRIBUTE>/<OPERATOR>/<CRITERIA>
-
-Supported Operators are:
-EQ:  Equals
-GT:  Greater than
-GE:  Greater than or equal to
-LT:  Less than
-LE:  Less than or equal to
-
 Additional Notes:
 Criteria must be URL encoded
 
