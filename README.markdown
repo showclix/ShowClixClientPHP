@@ -2,7 +2,7 @@
 
 This is the ShowClix API Client Library intended to facilitate access to the ShowClix RESTful API.  Documentation can be found at [The ShowClix Developer Site](http://developer.showclix.com) and below.
 
-For private access, you must contact ShowClix to be setup with a Partner Account and have your CSR signed.  Certain data is provided to the public (e.g. basic event and venue information) and does not require authentication.  See [The ShowClix Developer Site](http://developer.showclix.com) for more.
+The ShowClix API is only available to ShowClix customers. You must [authenticate](https://github.com/ShowClix/ShowClixClientPHP#authentication) to access the API.
 
 # The ShowClix API #
 
@@ -10,7 +10,6 @@ For private access, you must contact ShowClix to be setup with a Partner Account
 The ShowClix API is intended to allow third parties developers to integrate with the ShowClix platform.  With the API, partners can fetch information about upcoming events and even add events, sellers, and venues to the system without ever opening a browser.  The API is intended to be easy to use and secure.  For these reasons, the API was built in a RESTful style and uses SSL Certificates for authentication.
 
 The ShowClix API adheres closely to the principles behind the REST architecture style.  The API uses HTTP as its "uniform interface" and follows the HTTP 1.1 Standard, in particular when it comes to methods, status codes, and headers that promote caching and usability. 
-
 
 > ## A Brief, High-Level REST Introduction ##
 > A RESTful Web Service can be thought of as just Nouns and Verbs, or in more RESTful terms, Resources and Operations.  A RESTful Service has a group of things (aka Nouns, aka Resources) that we can do stuff to (aka we can apply Operations to these things/Resources).  Pretty simple idea.  These Resources and Operations have a few general principles: 
@@ -275,11 +274,6 @@ In addition to sending the appropriate status code response, the API will also s
 The ShowClix REST API promotes hyperlinking in resources representations.  This helps naturally expose the API and relationships among Resources.  When you find another URI in a representation, this typically means that it is hyperlinking to another resource in ShowClix.  Consider the Seller representation below.  Notice that the last attribute, event, has a URI for its value.  This actually links to another representation, a list of all events that belong to this seller.
 
     {"seller_id":"6","first_name":"Joe","organization":"Showclix","last_name":"Schmoe","events":"https:\/\/api.showclix.com\/rest.api\/Seller\/6/\events"}
-
-
-## Public vs. Private ##
-The ShowClix REST API supports two access levels, Public and Private.  Public access to the API does not require SSL authentication and does not require that the client accessing the data is the owner of the API.  As a result, the public access to the API is very limited and can only perform safe operations (e.g. GET, OPTIONS, HEAD) at the moment.  For partners that are interested in just retrieving basic event and venue data from the system, public access to the API works just fine.  Private access to the API allows for tighter integration (e.g. adding sellers and events to the system).  Private access requires that you use a signed SSL Certificate (provided by ShowClix) for authentication.  With this SSL certificate, the client can now add new Resources to the system and manipulate those Resources that the client owns.  A client can only manipulate resources that they directly own and can create relationships between resources that they own.  For example, a client cannot add an event to the system under a seller that they don't own.
-
 
 ## Authentication ##
 The ShowClix API uses a simple token exchange authentication system. All traffic to the API is served exclusively over https.
