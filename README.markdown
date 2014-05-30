@@ -91,7 +91,7 @@ Example:
 Get information about a particular event in the system.  This is a request to a Resource URI (define above), http://api.showclix.com/Event/4444.
 
 cURL Example:
-    curl -v http://api.showclix.com/Event/6454
+    curl -v --header "X-API-Token: <token>" https://api.showclix.com/Event/6454
     
     GET /rest.api/Event/6454 HTTP/1.1
     User-Agent: curl/7.19.5 (i386-apple-darwin8.11.1) libcurl/7.19.5 OpenSSL/0.9.7l zlib/1.2.3 libidn/1.15
@@ -117,7 +117,7 @@ Let's go ahead an change the time of our event that we just pulled (this assumes
 
 cURL Example:
 
-    curl -v -s -k --key private.key --cert certificate.crt -X PUT -d '{"event_id":"6454","seller_id":"678","venue_id":"842","event":"My New Event Title","description":"event desc","inventory":"600","private_event":"0","price":"18.00","price_label":"General Admission","price_limit":"1","ticket_purchase_timelimit":null,"ticket_purchase_limit":null,"will_call_ticketing":null,"ages":"0","image":"20091252630916.jpg","url":"http:\/\/www.jokerprod.com","event_type":"3","ticket_note":null,"genre":"Alternative","status":"5","scheme_id":null,"keywords":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","short_name":"","parent":null,"display_image":"1"}' https://api.showclix.com/Event/6454
+    curl -v --header "X-API-Token: <token>" -X PUT -d '{"event_id":"6454","seller_id":"678","venue_id":"842","event":"My New Event Title","description":"event desc","inventory":"600","private_event":"0","price":"18.00","price_label":"General Admission","price_limit":"1","ticket_purchase_timelimit":null,"ticket_purchase_limit":null,"will_call_ticketing":null,"ages":"0","image":"20091252630916.jpg","url":"http:\/\/www.jokerprod.com","event_type":"3","ticket_note":null,"genre":"Alternative","status":"5","scheme_id":null,"keywords":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","short_name":"","parent":null,"display_image":"1"}' https://api.showclix.com/Event/6454
     
     PUT /rest.api/Event/6454 HTTP/1.1
     User-Agent: curl/7.19.5 (i386-apple-darwin8.11.1) libcurl/7.19.5 OpenSSL/0.9.7l zlib/1.2.3 libidn/1.15
@@ -288,7 +288,7 @@ We recommend that you start by creating a new user underneath your partner or se
 
 You can generate a new API token for your API user via the token exchange.
 
-    curl --data "email=api@example.com&password=opensesame" https://admin.showclix.com/api/registration
+    curl --data "email=api@example.com&password=opensesame" -X POST https://admin.showclix.com/api/registration
     
     {"token":"<token>","user_id":"<user>","seller_id":"<seller>","name":{"first":"<user_first>","last":"<user_last>"},"org":"<org>","avatar":"","locale":"en_US"}
 
@@ -312,8 +312,4 @@ Notice that the values for the relationships in this representation (e.g. price_
 The client may desire to actually have these representations embedded right in place for these relationship values, rather than having to perform an additional lookup.  To do this, the client can specify the relationship as a value for the query parameter follows.  For example, if the client wanted to include details about the venue in this event representation, the client would GET http://api.showclix.com/Event/6456?follow[]=venue, returning a new representation with a venue representation embedded right in it...
 
     {"event_id":"6456","event":"Event Title","ages":"0","genre":"Alternative","date_added":"2009-11-16 10:38:35","date_edited":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","price_levels":"https:\/\/api.showclix.com\/Event\/6456\/price_levels","venue":{"venue_name":"The REST Venue","capacity":"999","description":"Test...","image":null,"seating_chart":null,"address":"123 Seasame St.","city":"Pittsburgh","state":"PA","zip":"12345","country":"USA","lat":"-73.9403000","lng":"42.8145000"},"seller":"https:\/\/api.showclix.com\/Event\/6456\/seller"}
-
-Extensions
-The API does allow for extensions to be placed in the URIs.  This will dictate which format your representation will be in.  For example http://api.showclix.com/Event/1234.json would return a JSON formatted representation of this Event Instance, whereas http://api.showclix.com/Event/1234.xml would return the same Event Instance formatted in XML.  At this time, only JSON is supported, however XML and YAML support is expected soon.  Presently when an extension is left of the default format (JSON) is assumed.
-
 
