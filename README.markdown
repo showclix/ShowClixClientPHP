@@ -143,7 +143,7 @@ POST requests allow the client to create new Resources.  A POST request to creat
 
 cURL Example:
 
-    curl -v -s -k --key private.key --cert certificate.crt -X POST -d '{"seller_id":"678","venue_id":"842","event":"Event Title","description":"event desc","inventory":"600","private_event":"0","price":"18.00","price_label":"General Admission","price_limit":"1","ticket_purchase_timelimit":null,"ticket_purchase_limit":null,"will_call_ticketing":null,"ages":"0","image":"20091252630916.jpg","url":"http:\/\/www.jokerprod.com","event_type":"3","ticket_note":null,"genre":"Alternative","status":"5","scheme_id":null,"keywords":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","short_name":"","parent":null,"display_image":"1"}' https://api.showclix.com/Event
+    curl -v --header "X-API-Token: <token>" -X POST -d '{"seller_id":"678","venue_id":"842","event":"Event Title","description":"event desc","inventory":"600","private_event":"0","price":"18.00","price_label":"General Admission","price_limit":"1","ticket_purchase_timelimit":null,"ticket_purchase_limit":null,"will_call_ticketing":null,"ages":"18","image":"20091252630916.jpg","url":"http:\/\/www.coolevents.com","event_type":"3","ticket_note":null,"genre":"Alternative","status":"5","scheme_id":null,"keywords":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","short_name":"","parent":null,"display_image":"1"}' https://api.showclix.com/Event
     
     POST /rest.api/Event HTTP/1.1
     User-Agent: curl/7.19.5 (i386-apple-darwin8.11.1) libcurl/7.19.5 OpenSSL/0.9.7l zlib/1.2.3 libidn/1.15
@@ -168,7 +168,7 @@ DELETE requests allow the client to remove Resources.  A DELETE request to a Res
 
 cURL Example:
 
-    curl -v -s -k --key private.key --cert certificate.crt -X DELETE https://api.showclix.com/Event/6454
+    curl -v --header "X-API-Token: <token>" -X DELETE https://api.showclix.com/Event/6454
     
     DELETE /rest.api/Event/6454 HTTP/1.1
     User-Agent: curl/7.19.5 (i386-apple-darwin8.11.1) libcurl/7.19.5 OpenSSL/0.9.7l zlib/1.2.3 libidn/1.15
@@ -184,7 +184,7 @@ cURL Example:
     Content-Type: text/javascript
     
     
-    {"event_id":"6454","seller_id":"678","venue_id":"842","event":"My New Event Title","description":"event desc","inventory":"600","private_event":"0","price":"18.00","price_label":"General Admission","price_limit":"1","ticket_purchase_timelimit":null,"ticket_purchase_limit":null,"will_call_ticketing":null,"ages":"0","url":"http:\/\/www.jokerprod.com","event_type":"3","ticket_note":null,"views":"0","genre":"Alternative","status":"5","newsletter_sent":"0","donation_live":"n","donation_name":"","date_added":"2009-09-19 14:39:00","date_edited":null,"scheme_id":null,"keywords":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","short_name":"","parent":null,"display_image":"1"}
+    {"event_id":"6454","seller_id":"678","venue_id":"842","event":"My New Event Title","description":"event desc","inventory":"600","private_event":"0","price":"18.00","price_label":"General Admission","price_limit":"1","ticket_purchase_timelimit":null,"ticket_purchase_limit":null,"will_call_ticketing":null,"ages":"0","url":"http:\/\/www.example.com","event_type":"3","ticket_note":null,"views":"0","genre":"Alternative","status":"5","newsletter_sent":"0","donation_live":"n","donation_name":"","date_added":"2009-09-19 14:39:00","date_edited":null,"scheme_id":null,"keywords":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","short_name":"","parent":null,"display_image":"1"}
 
 
 ### HEAD ###
@@ -192,7 +192,7 @@ The HEAD request is almost identical to the GET request, with the exception that
 
 cURL Example:
 
-    curl -v -X HEAD http://api.showclix.com/Event/6456
+    curl -v --header "X-API-Token: <token>" -X HEAD https://api.showclix.com/Event/6456
     
     HEAD /rest.api/Event/6456 HTTP/1.1
     User-Agent: curl/7.19.5 (i386-apple-darwin8.11.1) libcurl/7.19.5 OpenSSL/0.9.7l zlib/1.2.3 libidn/1.15
@@ -213,7 +213,7 @@ The OPTIONS request lets a client know what they are permitted to do.  It sets t
 
 cURL Example:
 
-    curl -v -s -k --key private.key --cert certificate.crt -X OPTIONS http://api.showclix.com/Event/6456
+    curl -v --header "X-API-Token: <token>" -X OPTIONS http://api.showclix.com/Event/6456
     
     OPTIONS /rest.api/Event/6456 HTTP/1.1
     User-Agent: curl/7.19.5 (i386-apple-darwin8.11.1) libcurl/7.19.5 OpenSSL/0.9.7l zlib/1.2.3 libidn/1.15
@@ -282,13 +282,22 @@ The ShowClix REST API supports two access levels, Public and Private.  Public ac
 
 
 ## Authentication ##
-The API uses SSL Client Certificates for authentication and private access to the API.  ShowClix can provide clients with a private key and signed certificate or partners can create a Certificate Signing Request for ShowClix to sign if that is preferred.  Here is an example using the CLI for the popular cURL library.
+The ShowClix API uses a simple token exchange authentication system. All traffic to the API is served exclusively over https.
 
-    curl -i -X GET --key private.key --cert public.crt https://api.showclix.com/Event/1234
+We recommend that you start by creating a new user underneath your partner or seller account. The permission you grant this user will determine what resources they can view/modify in the API. For this example let's say your new user's email and password are api@example.com and opensesame respectively.
 
+You can generate a new API token for your API user via the token exchange.
+
+    curl --data "email=api@example.com&password=opensesame" https://admin.showclix.com/api/registration
+    
+    {"token":"<token>","user_id":"<user>","seller_id":"<seller>","name":{"first":"<user_first>","last":"<user_last>"},"org":"<org>","avatar":"","locale":"en_US"}
+
+From here on out, you will pass this token value to the API via the "X-API-Token" header for each of your API requests.  Fo example:
+
+    curl -v --header "X-API-Token: <token>" https://api.showclix.com/Event/6454
 
 ## Abuse ##
-ShowClix tracks both public and private use of the API.  If we suspect a client is abusing the the API, ShowClix has the right to throttle or entirely revoke a client's access to the API.
+ShowClix tracks use of the API.  If we suspect a client is abusing the the API, ShowClix has the right to throttle or entirely revoke a client's access to the API.
 
 
 ## Additional Features ##
@@ -308,53 +317,3 @@ Extensions
 The API does allow for extensions to be placed in the URIs.  This will dictate which format your representation will be in.  For example http://api.showclix.com/Event/1234.json would return a JSON formatted representation of this Event Instance, whereas http://api.showclix.com/Event/1234.xml would return the same Event Instance formatted in XML.  At this time, only JSON is supported, however XML and YAML support is expected soon.  Presently when an extension is left of the default format (JSON) is assumed.
 
 
-## Client Library ##
-
-ShowClix provides developers with a one-file library, written in php, in order to ease development of web applications based on the ShowClix RESTful API. It is contained in the rest.php file found in the developer package, and consists of a single class, Server, which has the following useful methods:
-
-Constructor:
-The constructor takes a single associative array as its parameter. Possible keys are:
-
-* 'protocol' -- Either 'http' or 'https'
-* 'base_url' -- If you don't have explicit directions on how to change this, don't
-* 'clientcert' -- full path to the client certificate that ShowClix signed. This doesn't have to be present if the 'protocol' is 'http'
-* 'clientkey' -- full path to the client key used to create the client certificate signing request you sent to ShowClix. The key should be in PEM format, and should not have a password.
-* 'verifypeer' -- usually used in conjunction with 'base_url' -- if you weren't directed to set it, then you shouldn't need to touch it.
-* 'is\_sanbox' -- set to `TRUE` if you're using the developer sandbox.
-
-
-build\_url($rest)
-
-Generates a url for use with the rest of the framework with the protocl and base_url appropriately prepended to $rest. Example:
-
-* `$server->build_url('/Event/1234'); // By default: 'http://api.showclix.com/Event/1234'`
-
-> build\_uri($info)
-
-Takes the same thing as the first argument to get_resource, and turns it into a URI, if necessary.
-
-> extract\_from\_uri($info)
-
-Returns an array where the first element is an Resource name, and the second element is an Resource ID that correspond to the given URI
-
-NOTE: For the purposes of `get_resource`, `modify_resource` and `delete_resource`, the first argument is either a URI obtained from some server output, or it's an associative array with the keys:
-
-* 'entity' -- the name of the Resource with which you wish to deal (i.e. 'Event', 'Seller', etc.)
-* 'id' -- the id of the Resource you're accessing.
-
-
-> get\_resource($entityid\_or\_uri, $verbose=false)
-
-Retrieves the given resource, returning it as an object.
-
-> modify\_resource($entityid\_or\_uri, $modifications, $verbose=false)
-
-Modifies the specified resource, only updating the keys mentioned in `$modifications` with the corresponding values.
-
-> delete\_resource($entityid\_or\_uri, $verbose=false)
-
-Deletes the given resource.
-
-> create\_resource($entity, $initial, $verbose=false)
-
-Creates an Entity of the given type using initial values drawn from $initial
