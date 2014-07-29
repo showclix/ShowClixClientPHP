@@ -278,7 +278,7 @@ The ShowClix REST API promotes hyperlinking in resources representations.  This 
 ## Authentication ##
 The ShowClix API uses a simple token exchange authentication system. All traffic to the API is served exclusively over https.
 
-We recommend that you start by creating a new user underneath your partner or seller account. The permission you grant this user will determine what resources they can view/modify in the API. For this example let's say your new user's email and password are api@example.com and opensesame respectively.
+We recommend that you start by creating a new user underneath your partner or seller account. The permission you grant this user will determine what resources they can view/modify in the API. For this example let's say your new user's email and password are api@example.com and opensesame respectively. Tokens have a default TTL of 14 days so you may need to reauthenticate if a token expires.
 
 You can generate a new API token for your API user via the token exchange.
 
