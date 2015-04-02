@@ -1,4 +1,4 @@
-# This process of authenticating is now deprecated. Please refer to the token authentication strategy discussed in [this documentation](http://developer.showclix.com).
+# This process of authenticating is now deprecated. Please refer to the token authentication strategy discussed in [this documentation](https://github.com/ShowClix/ShowClixClientPHP/blob/master/README.markdown#authentication).
 
 Generating Certificates for use with the ShowClix API
 =====================================================
