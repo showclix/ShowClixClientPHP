@@ -2,7 +2,7 @@
 
 This is the ShowClix API Client Library intended to facilitate access to the ShowClix RESTful API.  Documentation can be found at [The ShowClix Developer Site](http://developer.showclix.com) and below.
 
-The ShowClix API is only available to ShowClix customers. You must [authenticate](https://github.com/ShowClix/ShowClixClientPHP#authentication) to access the API.
+The ShowClix API is only available to ShowClix customers. You must [authenticate](https://github.com/ShowClix/ShowClixClientPHP/blob/master/README.markdown#authentication) to access the API.
 
 # The ShowClix API #
 
