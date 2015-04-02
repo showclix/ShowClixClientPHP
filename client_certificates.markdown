@@ -1,3 +1,5 @@
+# This process of authenticating is now deprecated. Please refer to the token authentication strategy discussed in [this documentation](http://developer.showclix.com).
+
 Generating Certificates for use with the ShowClix API
 =====================================================
 
