@@ -69,9 +69,11 @@ A class URI corresponds to a single Class in the ShowClix domain.  Most commonly
 e.g. https://api.showclix.com/Seller/123/events
 It's typically good REST practice to expose relationships in your API.  One of the ways the ShowClix API does this is through relationship URIs (see Hyperlinking below for more).  The example URI above could be used to retrieve a list of all the events that belong to a single seller (identified by https://api.showclix.com/Seller/123).  To promote what is known as hyperlinking and make API users aware of what relationships are available to them for a particular resource, representations will often include Relationship URIs in them (e.g. the representation for the Seller identified by https://api.showclix.com/Seller/123 would include the https://api.showclix.com/Seller/123/events Relationship URI along with several other Relationship URIs).
 
-### Attribute URIs ###
+### Attribute and Method URIs ###
 e.g. https://api.showclix.com/Event/1234/tickets_remaining
-Attribute URIs expose additional information about a Resource.  Unlike the previous URIs, these URIs do not necessarily expose a Resource (or a collection of Resources like some Relationship URIs).  Instead they can expose scalar values or some other structured data.  The example URI above would return a single integer value determining how many tickets were still available for a particular event (identified by https://api.showclix.com/Event/1234).
+Attribute and method URIs expose additional information about a Resource.  Unlike the previous URIs, these URIs do not necessarily expose a Resource (or a collection of Resources like some Relationship URIs).  Instead they can expose scalar values or some other structured data.  The example URI above would return a single integer value determining how many tickets were still available for a particular event (identified by https://api.showclix.com/Event/1234).
+
+Optional or required parameters for a method are passed in using the query string in the URI.  For example, if you wanted to search for a sale on a particular event with a specific email then you would do the following: https://api.showclix.com/Sale/search?event=1234&email=john.doe@test.com
 
 Additional Notes:
 Criteria must be URL encoded
