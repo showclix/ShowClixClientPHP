@@ -309,3 +309,10 @@ The client may desire to actually have these representations embedded right in p
 
     {"event_id":"6456","event":"Event Title","ages":"0","genre":"Alternative","date_added":"2009-11-16 10:38:35","date_edited":null,"sales_open":"2009-09-19 14:39:00","event_start":"2009-11-08 18:30:00","event_end":"0000-00-00 00:00:00","price_levels":"https:\/\/api.showclix.com\/Event\/6456\/price_levels","venue":{"venue_name":"The REST Venue","capacity":"999","description":"Test...","image":null,"seating_chart":null,"address":"123 Seasame St.","city":"Pittsburgh","state":"PA","zip":"12345","country":"USA","lat":"-73.9403000","lng":"42.8145000"},"seller":"https:\/\/api.showclix.com\/Event\/6456\/seller"}
 
+### Fetch Seller's Events in batches ###
+https://api.showclix.com/Seller/:id/eventFilter will pull Seller's Events in batches. This request requires authentication
+Options are passed as url parameters:
+limit (integer) - minimum 2
+page (integer)
+view = individual (all events) or high_level (only series parent events)
+range = future, past, recent_forward(future events, including events from the last 48 hours)
