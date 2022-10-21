@@ -312,7 +312,7 @@ The client may desire to actually have these representations embedded right in p
 ### Fetch Seller's Events in batches ###
 https://api.showclix.com/Seller/:id/eventFilter will pull Seller's Events in batches. This request requires authentication
 Options are passed as url parameters:
-limit (integer) - minimum 2
-page (integer)
-view = individual (all events) or high_level (only series parent events)
-range = future, past, recent_forward(future events, including events from the last 48 hours)
+limit (integer) - count events per page, minimum 2
+start (integer) page index, start from 0
+view (string)  individual (all events) or high_level (only series parent events)
+range (string)  future, past, recent_forward(future events, including events from the last 48 hours)
